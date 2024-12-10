@@ -53,11 +53,11 @@ jobs:
         cp im-api/Dockerfile dist/im-api/ 
 
         mkdir -p dist/manager-api
-        cp manager-api/target/im-api-4.3.jar dist/manager-api/   
+        cp manager-api/target/manager-api-4.3.jar dist/manager-api/   
         cp manager-api/Dockerfile dist/manager-api/
 
         mkdir -p dist/seller-api
-        cp seller-api/target/im-api-4.3.jar dist/seller-api/
+        cp seller-api/target/seller-api-4.3.jar dist/seller-api/
         cp seller-api/Dockerfile dist/seller-api/
 
         mkdir -p dist/xxl-job
