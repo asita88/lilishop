@@ -32,33 +32,38 @@ jobs:
       
     - name: Copy Directory
       run: |
-        mkdir -p admin/dist
-        cp admin/target/admin-4.3.jar admin/dist/   
-        cp admin/Dockerfile admin/dist/
+        mkdir -p dist/admin
+        cp admin/target/admin-4.3.jar dist/admin/
+        cp admin/Dockerfile dist/admin/
 
-        mkdir -p buyer-api/dist
-        cp buyer-api/target/buyer-api-4.3.jar buyer-api/dist/   
-        cp buyer-api/Dockerfile buyer-api/dist/ 
+        mkdir -p dist/buyer-api
+        cp buyer-api/target/buyer-api-4.3.jar dist/buyer-api/   
+        cp buyer-api/Dockerfile dist/buyer-api/ 
 
-        mkdir -p common-api/dist
-        cp common-api/target/common-api-4.3.jar common-api/dist/   
-        cp common-api/Dockerfile common-api/dist/ 
+        mkdir -p dist/common-api
+        cp common-api/target/common-api-4.3.jar dist/common-api/   
+        cp common-api/Dockerfile dist/common-api/ 
 
-        mkdir -p consumer/dist
-        cp consumer/target/consumer-4.3.jar consumer/dist/   
-        cp consumer/Dockerfile consumer/dist/ 
+        mkdir -p dist/consumer
+        cp consumer/target/consumer-4.3.jar dist/consumer/   
+        cp consumer/Dockerfile dist/consumer/ 
 
-        mkdir -p im-api/dist
-        cp im-api/target/im-api-4.3.jar im-api/dist/   
-        cp im-api/Dockerfile im-api/dist/ 
+        mkdir -p dist/im-api
+        cp im-api/target/im-api-4.3.jar dist/im-api/   
+        cp im-api/Dockerfile dist/im-api/ 
 
-        mkdir -p manager-api/dist
-        cp manager-api/target/im-api-4.3.jar manager-api/dist/   
-        cp manager-api/Dockerfile manager-api/dist/ 
+        mkdir -p dist/manager-api
+        cp manager-api/target/im-api-4.3.jar dist/manager-api/   
+        cp manager-api/Dockerfile dist/manager-api/
 
-        mkdir -p seller-api/dist
-        cp seller-api/target/im-api-4.3.jar seller-api/dist/   
-        cp seller-api/Dockerfile seller-api/dist/ 
+        mkdir -p dist/seller-api
+        cp seller-api/target/im-api-4.3.jar dist/seller-api/
+        cp seller-api/Dockerfile dist/seller-api/
+
+        mkdir -p dist/xxl-job
+        cp xxl-job/xxl-job-admin-2.3.0-SNAPSHOT.jar dist/xxl-job/
+        cp xxl-job/Dockerfile dist/xxl-job/
+        cp xxl-job/application.properties dist/xxl-job/
     # ssh-keygen -m PEM -t rsa -b 4096
     # cat id_rsa.pub >> authorized_keys
     - name: Deploy admin
@@ -69,7 +74,7 @@ jobs:
         # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
         ARGS: "-avz --delete"
         # 你想要上传的文件夹路径
-        SOURCE: "admin/target/admin-4.3.jar"  
+        SOURCE: "dist/"  
         # 服务器域名/IP
         REMOTE_HOST: "1.13.245.30"
         # 服务器默认用户名为root
@@ -77,83 +82,7 @@ jobs:
         # 通常是22
         REMOTE_PORT: 22
         # 远程服务器上的目标路径       
-        TARGET: "/opt/lilishop/admin"
-        SCRIPT_BEFORE: |
-          whoami
-          ls -al
-        SCRIPT_AFTER: |
-          whoami
-          ls -al
-          cd /opt/lilishop/
-
-    - name: Deploy buyer-api
-      uses: easingthemes/ssh-deploy@main
-      env:
-        # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
-        ARGS: "-avz --delete"
-        # 你想要上传的文件夹路径
-        SOURCE: "buyer-api/target/buyer-api-4.3.jar"  
-        # 服务器域名/IP
-        REMOTE_HOST: "1.13.245.30"
-        # 服务器默认用户名为root
-        REMOTE_USER: "root"
-        # 通常是22
-        REMOTE_PORT: 22
-        # 远程服务器上的目标路径       
-        TARGET: "/opt/lilishop/buyer-api"
-        SCRIPT_BEFORE: |
-          whoami
-          ls -al
-        SCRIPT_AFTER: |
-          whoami
-          ls -al
-          cd /opt/lilishop/
-
-    - name: Deploy common-api
-      uses: easingthemes/ssh-deploy@main
-      env:
-        # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
-        ARGS: "-avz --delete"
-        # 你想要上传的文件夹路径
-        SOURCE: "common-api/target/common-api-4.3.jar"  
-        # 服务器域名/IP
-        REMOTE_HOST: "1.13.245.30"
-        # 服务器默认用户名为root
-        REMOTE_USER: "root"
-        # 通常是22
-        REMOTE_PORT: 22
-        # 远程服务器上的目标路径       
-        TARGET: "/opt/lilishop/common-api"
-        SCRIPT_BEFORE: |
-          whoami
-          ls -al
-        SCRIPT_AFTER: |
-          whoami
-          ls -al
-          cd /opt/lilishop/         
-
-
-    - name: Push Folder to Server
-      uses: easingthemes/ssh-deploy@main
-      env:
-        # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
-        ARGS: "-avz --delete"
-        # 你想要上传的文件夹路径
-        SOURCE: "xxl-job/"  
-        # 服务器域名/IP
-        REMOTE_HOST: "1.13.245.30"
-        # 服务器默认用户名为root
-        REMOTE_USER: "root"
-        # 通常是22
-        REMOTE_PORT: 22
-        # 远程服务器上的目标路径       
-        TARGET: "/opt/lilishop/xxl-job"
+        TARGET: "/opt/lilishop/"
         SCRIPT_BEFORE: |
           whoami
           ls -al
