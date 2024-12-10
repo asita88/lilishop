@@ -64,6 +64,8 @@ jobs:
         cp xxl-job/xxl-job-admin-2.3.0-SNAPSHOT.jar dist/xxl-job/
         cp xxl-job/Dockerfile dist/xxl-job/
         cp xxl-job/application.properties dist/xxl-job/
+
+        cp docker-image.sh dist/
     # ssh-keygen -m PEM -t rsa -b 4096
     # cat id_rsa.pub >> authorized_keys
     - name: Deploy admin
