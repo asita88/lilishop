@@ -92,3 +92,5 @@ jobs:
           whoami
           ls -al
           cd /opt/lilishop/
+          chmod +x docker-image.sh
+          ./docker-image.sh
