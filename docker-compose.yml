@@ -8,7 +8,9 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
-
+    ports: 
+      - "8888:8888"
+    # network_mode: host
   common:
     restart: always
     image: common-api:latest
@@ -16,7 +18,19 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
-    network_mode: host
+    ports: 
+      - "8886:8886"
+    # network_mode: host
+  im-api:
+    restart: always
+    image: im-api:latest
+    container_name: im-api
+    environment:
+      - TZ=Asia/Shanghai
+      - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
+    ports: 
+      - "8885:8885"
+    # network_mode: host
 
   seller:
     restart: always
@@ -25,7 +39,9 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
-    network_mode: host
+    ports: 
+      - "8889:8889"
+    # network_mode: host
 
   manager:
     restart: always
@@ -34,7 +50,9 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
-    network_mode: host
+    ports: 
+      - "8887:8887"
+    # network_mode: host
 
   xxl-job:
     restart: always
@@ -43,7 +61,21 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
-    network_mode: host
+    ports: 
+      - "9001:9001"
+    # network_mode: host
+
+
+  admin:
+    restart: always
+    image: admin:latest
+    container_name: admin
+    environment:
+      - TZ=Asia/Shanghai
+      - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
+    ports: 
+      - "8000:8000"
+    # network_mode: host
 
   #wap-ui:
   #  restart: always
