@@ -27,7 +27,7 @@ public class MemberWalletManagerController {
     private MemberWalletService memberWalletService;
 
     @GetMapping
-    @ApiOperation(value = "查询会员预存款余额")
+    @ApiOperation(value = "查询会员钱包")
     @ApiImplicitParam(name = "memberId", value = "会员ID", paramType = "query")
     public ResultMessage<MemberWalletVO> get(@RequestParam("memberId") String memberId) {
         return ResultUtil.data(memberWalletService.getMemberWallet(memberId));

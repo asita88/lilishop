@@ -18,9 +18,6 @@ import cn.lili.modules.connect.entity.dto.AuthResponse;
 import cn.lili.modules.connect.entity.dto.ConnectAuthUser;
 import cn.lili.modules.connect.exception.AuthException;
 import cn.lili.modules.connect.request.AuthRequest;
-import cn.lili.modules.connect.request.BaseAuthQQRequest;
-import cn.lili.modules.connect.request.BaseAuthWeChatPCRequest;
-import cn.lili.modules.connect.request.BaseAuthWeChatRequest;
 import cn.lili.modules.connect.service.ConnectService;
 import cn.lili.modules.system.entity.dos.Setting;
 import cn.lili.modules.system.entity.dto.connect.ConnectSetting;
@@ -151,61 +148,9 @@ public class ConnectUtil {
         }
         AuthRequest authRequest = null;
         switch (authInterface) {
-            case WECHAT: {
-                //寻找配置
-                Setting setting = settingService.get(SettingEnum.WECHAT_CONNECT.name());
-                WechatConnectSetting wechatConnectSetting = JSONUtil.toBean(setting.getSettingValue(), WechatConnectSetting.class);
-                //登录设置
-                ConnectSetting connectSetting = JSONUtil.toBean(settingService.get(SettingEnum.CONNECT_SETTING.name()).getSettingValue(), ConnectSetting.class);
-
-                for (WechatConnectSettingItem wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItems()) {
-                    if (wechatConnectSettingItem.getClientType().equals(ClientTypeEnum.H5.name())) {
-                        authRequest = new BaseAuthWeChatRequest(AuthConfig.builder()
-                                .clientId(wechatConnectSettingItem.getAppId())
-                                .clientSecret(wechatConnectSettingItem.getAppSecret())
-                                .redirectUri(getRedirectUri(authInterface, connectSetting.getCallbackUrl()))
-                                .build(), cache);
-                    }
-                }
-                break;
+            case DEMO: {
+                //寻找配置DEMO
             }
-            case WECHAT_PC: {
-                //寻找配置
-                Setting setting = settingService.get(SettingEnum.WECHAT_CONNECT.name());
-                WechatConnectSetting wechatConnectSetting = JSONUtil.toBean(setting.getSettingValue(), WechatConnectSetting.class);
-                //登录设置
-                ConnectSetting connectSetting = JSONUtil.toBean(settingService.get(SettingEnum.CONNECT_SETTING.name()).getSettingValue(), ConnectSetting.class);
-                for (WechatConnectSettingItem wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItems()) {
-                    if (wechatConnectSettingItem.getClientType().equals(ClientTypeEnum.PC.name())) {
-                        authRequest = new BaseAuthWeChatPCRequest(AuthConfig.builder()
-                                .clientId(wechatConnectSettingItem.getAppId())
-                                .clientSecret(wechatConnectSettingItem.getAppSecret())
-                                .redirectUri(getRedirectUri(authInterface, connectSetting.getCallbackUrl()))
-                                .build(), cache);
-                    }
-                }
-
-                break;
-            }
-            case QQ:
-                //寻找配置
-                Setting setting = settingService.get(SettingEnum.QQ_CONNECT.name());
-                QQConnectSetting qqConnectSetting = JSONUtil.toBean(setting.getSettingValue(), QQConnectSetting.class);
-                //登录设置
-                ConnectSetting connectSetting = JSONUtil.toBean(settingService.get(SettingEnum.CONNECT_SETTING.name()).getSettingValue(), ConnectSetting.class);
-                for (QQConnectSettingItem qqConnectSettingItem : qqConnectSetting.getQqConnectSettingItemList()) {
-                    if (qqConnectSettingItem.getClientType().equals(ClientTypeEnum.PC.name())) {
-                        authRequest = new BaseAuthQQRequest(AuthConfig.builder()
-                                .clientId(qqConnectSettingItem.getAppId())
-                                .clientSecret(qqConnectSettingItem.getAppKey())
-                                .redirectUri(getRedirectUri(authInterface, connectSetting.getCallbackUrl()))
-                                //这里qq获取unionid 需要配置为true，详情可以查阅属性说明，内部有帮助文档
-                                .unionId(true)
-                                .build(), cache);
-                    }
-                }
-
-                break;
             default:
                 break;
         }

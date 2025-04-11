@@ -24,7 +24,6 @@
         <skipTests>true</skipTests>
         <docker-registry>registry.cn-beijing.aliyuncs.com/lili-images</docker-registry>
         <images-version>1</images-version>
-        <alipay-sdk-version>4.22.32.ALL</alipay-sdk-version>
         <mybatis-plus-version>3.5.5</mybatis-plus-version>
         <Hutool-version>5.8.24</Hutool-version>
         <TinyPinyin-verions>2.0.3.RELEASE</TinyPinyin-verions>

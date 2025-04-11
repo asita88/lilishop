@@ -29,13 +29,13 @@ import cn.lili.modules.system.service.SettingService;
 import cn.lili.timetask.handler.EveryDayExecute;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author paulG
@@ -179,8 +179,8 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 
         //订单完成时间 <= 订单自动好评时间
         OrderItemOperationDTO orderItemOperationDTO =
-            OrderItemOperationDTO.builder().receiveTime(receiveTime).commentStatus(CommentStatusEnum.UNFINISHED.name())
-                .build();
+                OrderItemOperationDTO.builder().receiveTime(receiveTime).commentStatus(CommentStatusEnum.UNFINISHED.name())
+                        .build();
         List<OrderItem> orderItems = orderItemService.waitOperationOrderItem(orderItemOperationDTO);
 
         //判断是否有符合条件的订单，进行自动评价处理
@@ -240,7 +240,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 
         //关闭售后订单=未售后订单+小于订单关闭售后申请时间
         OrderItemOperationDTO build = OrderItemOperationDTO.builder().receiveTime(receiveTime)
-            .complainStatus(OrderComplaintStatusEnum.NO_APPLY.name()).build();
+                .complainStatus(OrderComplaintStatusEnum.NO_APPLY.name()).build();
         List<OrderItem> orderItems = orderItemService.waitOperationOrderItem(build);
 
         //判断是否有符合条件的订单，关闭允许售后申请处理
@@ -251,8 +251,8 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 
             //修改订单投诉状态
             LambdaUpdateWrapper<OrderItem> lambdaUpdateWrapper =
-                new LambdaUpdateWrapper<OrderItem>().set(OrderItem::getComplainStatus,
-                    OrderItemAfterSaleStatusEnum.EXPIRED.name()).in(OrderItem::getId, orderItemIdList);
+                    new LambdaUpdateWrapper<OrderItem>().set(OrderItem::getComplainStatus,
+                            OrderItemAfterSaleStatusEnum.EXPIRED.name()).in(OrderItem::getId, orderItemIdList);
             orderItemService.update(lambdaUpdateWrapper);
         }
 

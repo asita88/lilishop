@@ -77,18 +77,18 @@ public interface MemberService extends IService<Member> {
     /**
      * 商家登录：用户名、密码登录
      *
-     * @param mobilePhone 用户名
+     * @param userMail 用户名
      * @return token
      */
-    Token mobilePhoneStoreLogin(String mobilePhone);
+    Token mobilePhoneStoreLogin(String userMail);
 
     /**
      * 注册：手机号、验证码登录
      *
-     * @param mobilePhone 手机号
+     * @param userMail 手机号
      * @return token
      */
-    Token mobilePhoneLogin(String mobilePhone);
+    Token mobilePhoneLogin(String userMail);
 
     /**
      * 修改会员信息
@@ -112,10 +112,10 @@ public interface MemberService extends IService<Member> {
      *
      * @param userName    会员
      * @param password    密码
-     * @param mobilePhone mobilePhone
+     * @param userMail userMail
      * @return 处理结果
      */
-    Token register(String userName, String password, String mobilePhone);
+    Token register(String userName, String password, String userMail);
 
     /**
      * 是否可以初始化密码

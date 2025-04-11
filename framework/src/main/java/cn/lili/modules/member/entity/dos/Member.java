@@ -56,9 +56,13 @@ public class Member extends BaseEntity {
     private String region;
 
     @NotEmpty(message = "手机号码不能为空")
-    @ApiModelProperty(value = "手机号码", required = true)
+    @ApiModelProperty(value = "手机号码")
     @Sensitive(strategy = SensitiveStrategy.PHONE)
     private String mobile;
+
+    @NotEmpty(message = "手机号码不能为空")
+    @ApiModelProperty(value = "手机号码", required = true)
+    private String mail;
 
     @Min(message = "必须为数字", value = 0)
     @ApiModelProperty(value = "积分数量")
@@ -98,10 +102,10 @@ public class Member extends BaseEntity {
     private Long experience;
 
 
-    public Member(String username, String password, String mobile) {
+    public Member(String username, String password, String userMail) {
         this.username = username;
         this.password = password;
-        this.mobile = mobile;
+        this.mail = userMail;
         this.nickName = CommonUtil.getSpecialStr("用户");
         this.disabled = true;
         this.haveStore = false;
@@ -111,10 +115,10 @@ public class Member extends BaseEntity {
         this.lastLoginDate = new Date();
     }
 
-    public Member(String username, String password, String face, String nickName, Integer sex,String mobile) {
+    public Member(String username, String password, String face, String nickName, Integer sex, String userMail) {
         this.username = username;
         this.password = password;
-        this.mobile = mobile;
+        this.mail = userMail;
         this.nickName = nickName;
         this.disabled = true;
         this.haveStore = false;

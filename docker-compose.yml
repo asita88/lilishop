@@ -19,12 +19,12 @@ services:
       - TZ=Asia/Shanghai
       - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
     ports: 
-      - "8886:8886"
+      - "8890:8890"
     # network_mode: host
   im-api:
     restart: always
     image: im-api:latest
-    container_name: im-api
+    container_name: im
     environment:
       - TZ=Asia/Shanghai
       - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
@@ -53,7 +53,16 @@ services:
     ports: 
       - "8887:8887"
     # network_mode: host
-
+  consumer:
+    restart: always
+    image: consumer:latest
+    container_name: consumer
+    environment:
+      - TZ=Asia/Shanghai
+      - JAVA_OPTS=-XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -Xms128m -Xmx256m -Xmn128m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC
+    ports: 
+      - "8886:8886"
+    # network_mode: host
   xxl-job:
     restart: always
     image: xxl-job:latest

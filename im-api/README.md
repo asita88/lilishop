@@ -27,7 +27,7 @@ location / {
            proxy_set_header Connection "Upgrade";
            proxy_set_header X-real-ip $remote_addr;
            proxy_set_header X-Forwarded-For $remote_addr;
-           proxy_pass http://172.24.208.1:8885;
+           proxy_pass http://192.168.2.109:8885;
      }
 }
 ```
@@ -50,7 +50,7 @@ location / {
            proxy_set_header Connection "Upgrade";
            proxy_set_header X-real-ip $remote_addr;
            proxy_set_header X-Forwarded-For $remote_addr;
-           proxy_pass http://172.24.208.1:8885;
+           proxy_pass http://192.168.2.109:8885;
      }
 }
 ```

@@ -4,7 +4,6 @@ import cn.hutool.json.JSONUtil;
 import cn.lili.common.enums.ClientTypeEnum;
 import cn.lili.common.enums.ResultCode;
 import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.context.UserContext;
 import cn.lili.common.utils.SpringContextUtil;
 import cn.lili.common.vo.ResultMessage;
 import cn.lili.modules.payment.entity.enums.PaymentClientEnum;
@@ -173,7 +172,7 @@ public class CashierSupport {
                 throw new ServiceException(ResultCode.PAY_UN_WANTED);
             }
             cashierParam.setSupport(support(payParam.getClientType()));
-            cashierParam.setWalletValue(memberWalletService.getMemberWallet(UserContext.getCurrentUser().getId()).getMemberWallet());
+            // cashierParam.setWalletValue(memberWalletService.getMemberWallet(UserContext.getCurrentUser().getId()).getMemberWallet());
             OrderSetting orderSetting = JSONUtil.toBean(settingService.get(SettingEnum.ORDER_SETTING.name()).getSettingValue(), OrderSetting.class);
             Integer minute = orderSetting.getAutoCancel();
             cashierParam.setAutoCancel(cashierParam.getCreateTime().getTime() + minute * 1000 * 60);

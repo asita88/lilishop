@@ -24,15 +24,15 @@ spring:
   boot:
     admin:
       client:
-        url: http://172.24.208.1:8000
+        url: http://192.168.2.109:8000
   cache:
     type: redis
   #amqp
   #  rabbitmq:
-  #    host: 172.24.208.1
+  #    host: 192.168.2.109
   # Redis
   redis:
-    host: 172.24.208.1
+    host: 192.168.2.109
     port: 6379
     password: lilishop
     lettuce:
@@ -63,7 +63,7 @@ spring:
       default-datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://172.24.208.1:3306/new-lili?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+        url: jdbc:mysql://192.168.2.109:3306/lilishop?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
         username: lilishop
         password: 123456
         maxActive: 20
@@ -190,7 +190,7 @@ jasypt:
 
 lili:
   system:
-    isDemoSite: true
+    isDemoSite: false
   statistics:
     # 在线人数统计 X 小时。这里设置48，即统计过去48小时每小时在线人数
     onlineMember: 48
@@ -202,16 +202,16 @@ lili:
     sk: zhNKVrJK6UPOhqIjn8AQvG37b9sz6
   #域名
   domain:
-    pc: http://172.24.208.1:8888
-    wap: http://172.24.208.1:8888
-    seller: http://172.24.208.1:8888
-    admin: http://172.24.208.1:8888
+    pc: http://192.168.2.109:8888
+    wap: http://192.168.2.109:8888
+    seller: http://192.168.2.109:8888
+    admin: http://192.168.2.109:8888
   #api地址
   api:
     buyer: https://z171l91606.51mypc.cn
-    base: http://172.24.208.1:8888
-    manager: http://172.24.208.1:8888
-    seller: http://172.24.208.1:8888
+    base: http://192.168.2.109:8888
+    manager: http://192.168.2.109:8888
+    seller: http://192.168.2.109:8888
 
   # jwt 细节设定
   jwt-setting:
@@ -230,7 +230,7 @@ lili:
   data:
     elasticsearch:
       cluster-name: elasticsearch
-      cluster-nodes: 172.24.208.1:9200
+      cluster-nodes: 192.168.2.109:9200
       index:
         number-of-replicas: 0
         number-of-shards: 3
@@ -240,7 +240,7 @@ lili:
     #        username: elastic
     #        password: LiLiShopES
     logstash:
-      server: 172.24.208.1:4560
+      server: 192.168.2.109:4560
     rocketmq:
       promotion-topic: lili_promotion_topic
       promotion-group: lili_promotion_group
@@ -259,7 +259,7 @@ lili:
       notice-send-topic: lili_send_notice_topic
       notice-send-group: lili_send_notice_group
 rocketmq:
-  name-server: 172.24.208.1:9876
+  name-server: 192.168.2.109:9876
   producer:
     group: lili_group
     send-message-timeout: 30000
@@ -267,7 +267,7 @@ rocketmq:
 xxl:
   job:
     admin:
-      addresses: http://172.24.208.1:9001/xxl-job-admin
+      addresses: http://192.168.2.109:9001/xxl-job-admin
     executor:
       appname: xxl-job-executor-lilishop
       address:

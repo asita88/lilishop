@@ -2,11 +2,11 @@ package cn.lili.modules.file.entity.dto;
 
 import cn.lili.common.utils.DateUtil;
 import cn.lili.common.vo.PageVO;
-import com.alipay.api.internal.util.StringUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Calendar;
 import java.util.Date;

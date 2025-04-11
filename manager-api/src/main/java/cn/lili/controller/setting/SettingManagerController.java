@@ -12,10 +12,9 @@ import cn.lili.modules.system.entity.dto.*;
 import cn.lili.modules.system.entity.dto.connect.ConnectSetting;
 import cn.lili.modules.system.entity.dto.connect.QQConnectSetting;
 import cn.lili.modules.system.entity.dto.connect.WechatConnectSetting;
-import cn.lili.modules.system.entity.dto.payment.AlipayPaymentSetting;
+import cn.lili.modules.system.entity.dto.payment.TrcPaymentSetting;
 import cn.lili.modules.system.entity.dto.payment.PaymentSupportSetting;
-import cn.lili.modules.system.entity.dto.payment.UnionPaymentSetting;
-import cn.lili.modules.system.entity.dto.payment.WechatPaymentSetting;
+import cn.lili.modules.system.entity.dto.payment.ErcPaymentSetting;
 import cn.lili.modules.system.entity.dto.payment.dto.PaymentSupportForm;
 import cn.lili.modules.system.entity.enums.SettingEnum;
 import cn.lili.modules.system.service.SettingService;
@@ -54,7 +53,7 @@ public class SettingManagerController {
                     "WECHAT_PC_CONNECT,WECHAT_WAP_CONNECT,WECHAT_APP_CONNECT,WECHAT_MP_CONNECT," +
                     "QQ_WEB_CONNECT,QQ_APP_CONNECT," +
                     "QQ_WEB_CONNECT,QQ_APP_CONNECT,WEIBO_CONNECT,ALIPAY_CONNECT," +
-                    "PAYMENT_SUPPORT,ALIPAY_PAYMENT,WECHAT_PAYMENT,SECKILL_SETTING,EXPERIENCE_SETTING,IM,CONNECT_SETTING")
+                    "PAYMENT_SUPPORT,ALIPAY_PAYMENT,WECHAT_PAYMENT,TRC_PAYMENT,ERC_PAYMENT,SECKILL_SETTING,EXPERIENCE_SETTING,IM,CONNECT_SETTING")
     public ResultMessage saveConfig(@PathVariable String key, @RequestBody String configValue) {
         SettingEnum settingEnum = SettingEnum.valueOf(key);
         //获取系统配置
@@ -173,22 +172,18 @@ public class SettingManagerController {
                 return setting == null ?
                         ResultUtil.data(new PaymentSupportSetting(new PaymentSupportForm())) :
                         ResultUtil.data(JSONUtil.toBean(setting.getSettingValue(), PaymentSupportSetting.class));
-            case ALIPAY_PAYMENT:
+            case TRC_PAYMENT:
                 return setting == null ?
-                        ResultUtil.data(new AlipayPaymentSetting()) :
-                        ResultUtil.data(JSONUtil.toBean(setting.getSettingValue(), AlipayPaymentSetting.class));
-            case UNIONPAY_PAYMENT:
+                        ResultUtil.data(new TrcPaymentSetting()) :
+                        ResultUtil.data(JSONUtil.toBean(setting.getSettingValue(), TrcPaymentSetting.class));
+            case ERC_PAYMENT:
                 return setting == null ?
-                        ResultUtil.data(new UnionPaymentSetting()) :
-                        ResultUtil.data(JSONUtil.toBean(setting.getSettingValue(), UnionPaymentSetting.class));
+                        ResultUtil.data(new ErcPaymentSetting()) :
+                        ResultUtil.data(JSONUtil.toBean(setting.getSettingValue(), ErcPaymentSetting.class));
             case WECHAT_CONNECT:
                 return setting == null ?
                         ResultUtil.data(new WechatConnectSetting()) :
                         ResultUtil.data(JSONUtil.toBean(setting.getSettingValue(), WechatConnectSetting.class));
-            case WECHAT_PAYMENT:
-                return setting == null ?
-                        ResultUtil.data(new WechatPaymentSetting()) :
-                        ResultUtil.data(JSONUtil.toBean(setting.getSettingValue(), WechatPaymentSetting.class));
             case SECKILL_SETTING:
                 return setting == null ?
                         ResultUtil.data(new SeckillSetting()) :

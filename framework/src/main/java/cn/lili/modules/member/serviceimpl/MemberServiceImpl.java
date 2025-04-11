@@ -201,8 +201,8 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     }
 
     @Override
-    public Token mobilePhoneStoreLogin(String mobilePhone) {
-        Member member = this.findMember(mobilePhone);
+    public Token mobilePhoneStoreLogin(String userMail) {
+        Member member = this.findMember(userMail);
         //如果手机号不存在则自动注册用户
         if (member == null) {
             throw new ServiceException(ResultCode.USER_NOT_EXIST);
@@ -283,13 +283,13 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
     @Override
     @Transactional
-    public Token mobilePhoneLogin(String mobilePhone) {
+    public Token mobilePhoneLogin(String userMail) {
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("mobile", mobilePhone);
+        queryWrapper.eq("mobile", userMail);
         Member member = this.baseMapper.selectOne(queryWrapper, false);
         //如果手机号不存在则自动注册用户
         if (member == null) {
-            member = new Member(mobilePhone, UuidUtils.getUUID(), mobilePhone);
+            member = new Member(userMail, UuidUtils.getUUID(), userMail);
             registerHandler(member);
         }
         //判断用户是否有效
@@ -407,11 +407,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
     @Override
     @Transactional
-    public Token register(String userName, String password, String mobilePhone) {
+    public Token register(String userName, String password, String userMail) {
         //检测会员信息
-        checkMember(userName, mobilePhone);
+        checkMember(userName, userMail);
         //设置会员信息
-        Member member = new Member(userName, new BCryptPasswordEncoder().encode(password), mobilePhone);
+        Member member = new Member(userName, new BCryptPasswordEncoder().encode(password), userMail);
         //注册成功后用户自动登录
         registerHandler(member);
         return memberTokenGenerate.createToken(member, false);
@@ -563,12 +563,12 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     /**
      * 根据手机号获取会员
      *
-     * @param mobilePhone 手机号
+     * @param userMail 手机号
      * @return 会员
      */
-    private Long findMember(String mobilePhone, String userName) {
+    private Long findMember(String userMail, String userName) {
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("mobile", mobilePhone)
+        queryWrapper.eq("mobile", userMail)
                 .or().eq("username", userName);
         return this.baseMapper.selectCount(queryWrapper);
     }
@@ -835,11 +835,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
      * 检测会员
      *
      * @param userName    会员名称
-     * @param mobilePhone 手机号
+     * @param userMail 手机号
      */
-    private void checkMember(String userName, String mobilePhone) {
+    private void checkMember(String userName, String userMail) {
         //判断手机号是否存在
-        if (findMember(mobilePhone, userName) > 0) {
+        if (findMember(userMail, userName) > 0) {
             throw new ServiceException(ResultCode.USER_EXIST);
         }
     }

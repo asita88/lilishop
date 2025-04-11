@@ -1,6 +1,7 @@
 package cn.lili.modules.goods.entity.dos;
 
 import cn.lili.mybatis.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 商品分类
@@ -56,7 +58,11 @@ public class Category extends BaseEntity {
     @ApiModelProperty(value = "是否支持频道")
     private Boolean supportChannel;
 
-    public Category(String id, String createBy, Date createTime, String updateBy, Date updateTime, Boolean deleteFlag, String name, String parentId, Integer level, BigDecimal sortOrder, Double commissionRate, String image, Boolean supportChannel) {
+    @ApiModelProperty(value = "国际化分类名称")
+    @TableField("i18n_name")
+    private Map<String, String> i18nName;
+
+    public Category(String id, String createBy, Date createTime, String updateBy, Date updateTime, Boolean deleteFlag, String name, String parentId, Integer level, BigDecimal sortOrder, Double commissionRate, String image, Boolean supportChannel, Map<String, String> i18nName) {
         super(id, createBy, createTime, updateBy, updateTime, deleteFlag);
         this.name = name;
         this.parentId = parentId;
@@ -65,9 +71,10 @@ public class Category extends BaseEntity {
         this.commissionRate = commissionRate;
         this.image = image;
         this.supportChannel = supportChannel;
+        this.i18nName = i18nName;
     }
 
-    public Category(String id, String name, String parentId, Integer level, BigDecimal sortOrder, Double commissionRate, String image, Boolean supportChannel) {
+    public Category(String id, String name, String parentId, Integer level, BigDecimal sortOrder, Double commissionRate, String image, Boolean supportChannel, Map<String, String> i18nName) {
         this.name = name;
         this.parentId = parentId;
         this.level = level;
@@ -75,5 +82,6 @@ public class Category extends BaseEntity {
         this.commissionRate = commissionRate;
         this.image = image;
         this.supportChannel = supportChannel;
+        this.i18nName = i18nName;
     }
 }

@@ -43,8 +43,8 @@ public class CashierParam {
     @ApiModelProperty(value = "支付自动结束时间")
     private Long autoCancel;
 
-    @ApiModelProperty(value = "剩余余额")
-    private Double walletValue;
+    //@ApiModelProperty(value = "剩余余额")
+    //private Double walletValue;
 
     public String getDetail() {
         if (CharSequenceUtil.isEmpty(detail)) {

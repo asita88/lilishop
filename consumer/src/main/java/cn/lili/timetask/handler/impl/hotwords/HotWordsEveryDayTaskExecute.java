@@ -3,7 +3,6 @@ package cn.lili.timetask.handler.impl.hotwords;
 import cn.hutool.json.JSONUtil;
 import cn.lili.cache.Cache;
 import cn.lili.cache.CachePrefix;
-import cn.lili.common.utils.StringUtils;
 import cn.lili.modules.search.entity.dos.HotWordsHistory;
 import cn.lili.modules.search.service.HotWordsHistoryService;
 import cn.lili.modules.system.entity.dos.Setting;
@@ -18,7 +17,10 @@ import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author paulG

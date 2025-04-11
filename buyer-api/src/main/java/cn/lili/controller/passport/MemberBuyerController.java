@@ -195,22 +195,21 @@ public class MemberBuyerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", required = true, paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, paramType = "query"),
-            @ApiImplicitParam(name = "mobilePhone", value = "手机号", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "userMail", value = "邮箱", required = true, paramType = "query"),
             @ApiImplicitParam(name = "code", value = "验证码", required = true, paramType = "query")
     })
     @PostMapping("/register")
     public ResultMessage<Object> register(@NotNull(message = "用户名不能为空") @RequestParam String username,
                                           @NotNull(message = "密码不能为空") @RequestParam String password,
-                                          @NotNull(message = "手机号为空") @RequestParam String mobilePhone,
-                                          @RequestHeader String uuid,
-                                          @NotNull(message = "验证码不能为空") @RequestParam String code) {
+                                          @NotNull(message = "邮箱为空") @RequestParam String userMail,
+                                          @RequestHeader String uuid) {
 
-        if (smsUtil.verifyCode(mobilePhone, VerificationEnums.REGISTER, uuid, code)) {
-            return ResultUtil.data(memberService.register(username, password, mobilePhone));
-        } else {
-            throw new ServiceException(ResultCode.VERIFICATION_SMS_CHECKED_ERROR);
-        }
-
+        // if (smsUtil.verifyCode(userMail, VerificationEnums.REGISTER, uuid, code)) {
+        //     return ResultUtil.data(memberService.register(username, password, userMail));
+        // } else {
+        //     throw new ServiceException(ResultCode.VERIFICATION_SMS_CHECKED_ERROR);
+        // }
+        return ResultUtil.data(memberService.register(username, password, userMail));
     }
 
     @ApiOperation(value = "获取当前登录用户接口")

@@ -11,16 +11,12 @@ public enum PaymentMethodEnum {
     /**
      * 微信
      */
-    WECHAT("wechatPlugin", "微信"),
+    ERC("ercPlugin", "微信"),
     /**
      * 支付宝
      */
-    ALIPAY("aliPayPlugin", "支付宝"),
+    TRC("trcPlugin", "支付宝"),
 
-    /**
-     * 银联-云闪付
-     */
-    UNIONPAY("unionPayPlugin", "银联-云闪付"),
     /**
      * 余额支付
      */

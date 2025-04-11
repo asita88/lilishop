@@ -1,17 +1,7 @@
 package cn.lili.timetask.handler.impl.promotion;
 
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.modules.promotion.entity.dos.Seckill;
 import cn.lili.modules.promotion.service.MemberCouponSignService;
-import cn.lili.modules.promotion.service.SeckillService;
-import cn.lili.modules.promotion.tools.PromotionTools;
-import cn.lili.modules.search.service.EsGoodsIndexService;
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.entity.dto.SeckillSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.service.SettingService;
 import cn.lili.timetask.handler.EveryDayExecute;
-import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

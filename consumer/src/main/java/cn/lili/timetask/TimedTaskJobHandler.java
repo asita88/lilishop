@@ -39,7 +39,7 @@ public class TimedTaskJobHandler {
      * @throws Exception
      */
     @XxlJob("everyMinuteExecute")
-    public ReturnT<String> everyMinuteExecute(String param)  {
+    public ReturnT<String> everyMinuteExecute(String param) {
         log.info("每分钟任务执行");
         if (everyMinuteExecutes == null || everyMinuteExecutes.size() == 0) {
             return ReturnT.SUCCESS;

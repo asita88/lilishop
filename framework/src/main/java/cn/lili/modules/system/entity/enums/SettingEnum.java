@@ -45,12 +45,10 @@ public enum SettingEnum {
 
     //各端支持支付设置
     PAYMENT_SUPPORT,
-    //支付宝支付设置
-    ALIPAY_PAYMENT,
-    //微信支付设置
-    WECHAT_PAYMENT,
-    //银联支付设置
-    UNIONPAY_PAYMENT,
+    //TRC支付设置
+    TRC_PAYMENT,
+    //ERC支付设置
+    ERC_PAYMENT,
     //热词设置
     HOT_WORDS
 }

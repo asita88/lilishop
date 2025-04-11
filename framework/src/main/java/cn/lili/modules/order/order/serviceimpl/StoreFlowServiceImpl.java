@@ -26,7 +26,6 @@ import cn.lili.modules.store.entity.dto.BillSearchParams;
 import cn.lili.modules.store.entity.vos.StoreFlowPayDownloadVO;
 import cn.lili.modules.store.entity.vos.StoreFlowRefundDownloadVO;
 import cn.lili.modules.store.service.BillService;
-import cn.lili.modules.system.entity.dto.payment.WechatPaymentSetting;
 import cn.lili.mybatis.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;

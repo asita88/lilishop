@@ -321,8 +321,8 @@ public class MemberWalletServiceImpl extends ServiceImpl<MemberWalletMapper, Mem
         WithdrawalSetting withdrawalSetting = new Gson().fromJson(setting.getSettingValue(), WithdrawalSetting.class);
 
         //调用提现方法
-        TransferResultDTO transferResultDTO = "WECHAT".equals(withdrawalSetting.getType()) ?
-                cashierSupport.transfer(PaymentMethodEnum.WECHAT, memberWithdrawApply) : cashierSupport.transfer(PaymentMethodEnum.ALIPAY,
+        TransferResultDTO transferResultDTO = "TRC".equals(withdrawalSetting.getType()) ?
+                cashierSupport.transfer(PaymentMethodEnum.TRC, memberWithdrawApply) : cashierSupport.transfer(PaymentMethodEnum.ERC,
                 memberWithdrawApply);
 
         //成功则扣减冻结金额

@@ -28,7 +28,4 @@ public class PayParam {
     @NotNull
     @ApiModelProperty(value = "客户端类型")
     private String clientType;
-
-
-
 }
